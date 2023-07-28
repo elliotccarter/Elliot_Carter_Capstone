@@ -48,3 +48,16 @@ The study includes two datsets, which differ in the columns they contain. Here i
 - 'CHES_version': the version of the 'Chapel Hill Expert Survey' used, a survey of experts which produces a codebook for estimating the political ideology of political parties. The CHES codebook was used to translate participants' proclaimed voting intentions or party preferences into comparable numerical ratings (see: https://www.chesdata.eu/)
 - 'lrgen','lrecon','galtan': rating of political party preference on different versions of left-right scale (gen: general scale, econ: economic scale, galtan: social scale) (Dataset also includes means and Z-scores for these variables)
 - 'lrgengov','lrecongov','galtangov': country-level variables representing the ruling party's location on three different left-right spectra: general, economic, and social, respectively
+
+
+References:
+
+Brandenstein, N. (2022). Going beyond simplicity: Using machine learning to predict belief in conspiracy theories. European Journal of Social Psychology, 52, 910– 930. https://doi.org/10.1002/ejsp.2859
+
+Bruder M, Haffke P, Neave N, Nouripanah N and Imhoff R (2013) Measuring individual differences in generic beliefs in conspiracy theories across cultures: Conspiracy Mentality Questionnaire. Front. Psychol. 4:225. doi: https://doi.org/10.3389/fpsyg.2013.00225
+
+Imhoff, R., Zimmer, F., Klein, O. et al. (2022). Conspiracy mentality and political orientation across 26 countries. Nat Hum Behav 6, 392–403. https://doi.org/10.1038/s41562-021-01258-7
+
+McBride, O., Murphy, J., Shevlin, M., Gibson-Miller, J., Hartman, T.K., Hyland, P., Levita, L., Mason, L., Martinez, A.P., McKay, R., Stocks, T.V., Bennett, K.M., Vallières, F., Karatzias, T., Valiente, C., Vazquez, C. and Bentall, R.P. (2021), Monitoring the psychological, social, and economic impact of the COVID-19 pandemic in the population: Context, design and conduct of the longitudinal COVID-19 psychological research consortium (C19PRC) study. Int J Methods Psychiatr Res, 30: e1861. https://doi.org/10.1002/mpr.1861
+
+
