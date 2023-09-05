@@ -1,5 +1,5 @@
-# Elliot_Carter_Capstone
-**Project title: Modelling and Understanding Conspiracy Belief**
+# Modelling and Understanding Conspiracy Belief
+**Capstone project for BrainStation data science bootcamp, June-September 2023**
 
 Download original data from:
 https://osf.io/jqnd6/ (must be converted to .csv from .RData)
