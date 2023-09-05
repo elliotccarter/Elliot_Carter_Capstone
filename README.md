@@ -1,5 +1,7 @@
 # Modelling and Understanding Conspiracy Belief
 **Capstone project for BrainStation data science bootcamp, June-September 2023**
+**Author**: Elliot Carter
+**Contact**: elliot.carter@gmail.com
 
 Download original data from:
 https://osf.io/jqnd6/ (must be converted to .csv from .RData)
