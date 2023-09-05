@@ -1,26 +1,48 @@
 # Elliot_Carter_Capstone
-**Project title: Modelling and Predicting Conspiracy Belief**
+**Project title: Modelling and Understanding Conspiracy Belief**
 
-Download dataset from:
+Download original data from:
 https://osf.io/jqnd6/ (must be converted to .csv from .RData)
+
+Cleaned dataset and supplementary datasets available at:
+https://drive.google.com/drive/folders/1vlUBD_szowe5O3GKrLhlAaN0_fqkKB3L?usp=sharing
+
+Enviroment
+
+    conda create -n conspiracy_project python=3.9 numpy pandas matplotlib seaborn plotly scikit-learn=0.24.1 jupyter jupyterlab conda activate er_predictor
+    
+Other libraries used
+
+    conda install -c conda-forge xgboost=1.1.1 mlxtend conda install -c conda-forge shap conda install -c conda-forge lime
+
+Kernel
+
+    ipython kernel install --name "conspiracy_project" --user
 
 **Project Overview**:
 
-**Problem Area**:
+My project is aimed at using the tools of data science to better understand the phenomenon of conspiracy theory belief. Public officials need to understand the factors driving conspiracy belief to guide decision-making and communication. Deeper knowledge of the appeal of conspiracy theories and of the kinds of people who believe them would allow for better targeted messaging and interventions. This could help with educating the public on the efficacy and safety of vaccines, or on the necessity of environmental regulation. For a concrete example, consider that an independent research group, the Council of Canadian Academies, reports that misinformation about COVID-19 vaccines caused hesitancy towards vaccination for 2.35 million Canadians, and that vaccine hesitancy led to an excess $300 million in hospital costs and 2,800 deaths in Canada alone.
 
-Many of the biggest problems we face collectively—climate change, pandemics, and threats to democracy, for example—demand coordinated, cooperative responses. But how can we cooperate to address these issues when we cannot even agree about their existence or nature? Misinformation and conspiracy belief are widespread and persistent obstacles to building the collective trust required to meet these challenges.
+The dataset I am working with comes from a 2022 paper by Roland Imhoff and 39 coauthors at various European universities (Imhoff et al 2022). The paper reports the results of two surveys studying the relationship between political orientation and susceptibility to conspiracy belief, with respondents from 26 European countries. The datasets include two measures of  political orientation: self-reported location on a left-right political spectrum and reported voting behaviour in the previous election. Susceptibility to conspiracy belief is measured via responses to a standard questionnaire (the 'Conspiracy Mentality Questionnaire,' or 'CMQ') (originating in Bruder et al 2013). The datasets also include personal-level demographic information (age, sex, country, etc.) as well as some country-level information about political and economic climate.
 
-It is notoriously difficult to change conspiracy theorists’ minds (‘Of course things seem that way; that’s part of the cover up!’). But a reasonable first step would be to try to understand why people believe in conspiracy theories, and what kinds of people are most susceptible to conspiracy belief.
+In this project, I perform exploratory data analysis and data cleaning to prepare the data for modelling, and then optimize various models and use model-agnostic interpretive tools (SHAP and LIME) to understand how the models generate their predictions. I analyze the results to get a better understanding of the various linear and non-linear relationships between the individual and country-level features and conspiracy mentality. 
 
-**The User and the Impact**:
+**Description of Project Components**:
 
-Public officials need to understand the motivations behind conspiracy belief to guide decision-making and communication. Deeper knowledge of the appeal of conspiracy theories and of the kinds of people who believe them would allow for better targeted messaging and interventions. This could help with educating the public on the efficacy and safety of vaccines, or on the necessity of environmental regulation. For a concrete example, consider that an independent research group, the Council of Canadian Academies, reports that misinformation about COVID-19 vaccines caused hesitancy towards vaccination for 2.35 million Canadians, and that vaccine hesitancy led to an excess $300 million in hospital costs and 2,800 deaths in Canada alone.  To tackle the problems posed by misinformation, we need a better collective understanding of how it spreads.
+**1_Initial_EDA**: This notebook reflects the first stage of the project, including exploratory data analysis, with a focus on identifying data quality issues and other concerns that set the stage for the preprocessing required before modelling. It also contains some initial observations about the distribution of the data and country-level patterns.
 
-**The Idea**:
+**2_EDA_and_Baseline_Modelling**: This notebook is the second stage of the project, and it contains the bulk of the data cleaning and preprocessing, with a focus on dealing with missing data and null values. It also includes some feature engineering, wherein new country-level features are added to the dataset, including unemployment rate, GDP, and the Economist's 'Democracy Index' score for each country. The notebook also contains baseline models of the data, which set the stage for further modelling in part 3.
 
-The idea behind this project is to use machine learning to help identify the factors that best predict conspiracy belief. The extant quantitative research on conspiracy theories has identified various correlations between conspiracy belief and demographic variables (e.g., age, or gender) or psychological features (e.g., narcissism, or trust in scientists or governments). 
+**3_Model_Optimizaiton_and_Interpretation**: In this notebook, I use the previous baseline modelling results to guide the process of optimizing the models, and I explore options for interpreting the models using some model-agnostic interpretive tools (SHAP and LIME). I am working with the final, cleaned version of the data here. In the final section, I summarize the results of the models, recording the parameters and scores for the best versions. I also draw some conclusions about what we can learn by comparing the models' performance as well as from the results of the model-agnostic interpretive tools.
 
-But little work has been done so far attempting to model the data or apply the tools of machine learning to the problem. An exception is Brandenstein (2022), who built a predictive model based on survey data collected by the COVID-19 Psychological Research Consortium in the UK (McBride et al. 2019). The aim of this project is to further explore the application of machine learning techniques to understanding conspiracy belief. For example, how might we use other datasets to build predictive models to understand what makes someone susceptible to believing in conspiracy theories? Or how might we use machine learning segmentation or cluster analysis to understand the relationships between demographic and psychological features typical of a conspiracy believer?
+The github for the project also includes slides from presentations given at the BrainStation data science bootcamp, corresponding to the material covered in notebooks 2 and 3.
+
+**Key Results**:
+
+- The best performing models on the dataset are non-linear, ensemble models: Gradient Boosting Regressor and XGBoost Classifier. With the best regression model, we can explain about 27% of the deviations from average conspiracy mentality score in the dataset. With the best classification model, we can accurately categorize about 70% of data points as having above-average conspiracy mentality scores.
+- The features that the model uses to generate predictions ('predictors') include both individual level attributes (like age, sex, and political orientation) and country-level features (like the respondent's country, its GDP and its unemployment rate). In our best models, the most important individual-level predictors turn out to be the respondent's level of social conservatism (higher tends to cause higher predictions of conspiracy mentality) and their education status (university degrees tend to cause lower predictions). Features like age and sex also have considerable effects on the models' predictions, but the relationship is complex and non-linear (e.g., it's not simply that higher ages cause higher predictions or vice versa). The most important country-level feature across the models seems to be the country's unemployment rate, with lower rates causing lower predictions.
+- What country the respondent comes from does not generally have a large effect on the predictions of our best models, with one exception: a respondent being from the Netherlands is one of the most important features our models used to predict conspiracy mentality (it causes lower predictions). The Netherlands has the lowest average conspiracy mentality score of all countries in the dataset, and it seems that the models cannot predict its low average score from combinations of other features (if we compare with Turkiye or Spain, the countries with the highest average scores, these countries turn out not to be important predictors for the best models).
+
 
 **The Data**:
 
@@ -49,13 +71,6 @@ The data for this project comes from a 2022 study by Imhoff et al, from a paper 
 - 'lrgen','lrecon','galtan': rating of political party preference on different versions of left-right scale (gen: general scale, econ: economic scale, galtan: social scale) (Dataset also includes means and Z-scores for these variables)
 - 'lrgengov','lrecongov','galtangov': country-level variables representing the ruling party's location on three different left-right spectra: general, economic, and social, respectively
 
-**Roadmap**:
-
-**Sprint 1**: This notebook reflects the first stage of the project, including exploratory data analysis, with a focus on identifying data quality issues and other concerns that set the stage for the preprocessing required before modelling. It also contains some initial observations about the distribution of the data and country-level patterns.
-
-**Sprint 2**: This notebook is the second stage of the project, and it contains the bulk of the data cleaning and preprocessing, with a focus on dealing with missing data and null values. It also includes some feature engineering, wherein new country-level features are added to the dataset, including unemployment rate, GDP, and the Economist's 'Democracy Index' score for each country. The notebook also contains baseline models of the data, which set the stage for further modelling in part 3.
-
-**Sprint 3**: This notebook will contain attempts to refine the models introduced in Sprint 2. We will optimize the model hyperparameters using cross validation and machine learning pipelines. We will also make an effort to use model agnostic tools for interpretting some of the harder-to-interpret (but predictively powerful) models, such as gradient boosting regressors and classifiers.
 
 **References**:
 
