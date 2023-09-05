@@ -1,7 +1,0 @@
-load("/Users/elliotcarter/Desktop/Data Science Courses/BrainStation/Capstone Project/Data/data_study1.RData")
-ls()
-write.csv(data, file="data_study1.csv")
-> load("/Users/elliotcarter/Desktop/Data Science Courses/BrainStation/Capstone Project/Data/data_study2.RData")
-load("/Users/elliotcarter/Desktop/Data Science Courses/BrainStation/Capstone Project/Data/data_study2.RData")
-ls()
-write.csv(data,file="data_study2.csv")
